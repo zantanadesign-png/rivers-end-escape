@@ -9,6 +9,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        editorial: "rounded-full border border-foreground bg-transparent text-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground shadow-none h-12 px-7 font-normal",
+        booking: "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-none h-12 px-7 font-normal",
+        photo: "rounded-full border border-photo-foreground/70 bg-transparent text-photo-foreground hover:bg-photo-foreground/15 shadow-none h-12 px-7 font-normal",
+        quiet: "rounded-none bg-transparent text-foreground hover:text-primary shadow-none font-normal",
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
