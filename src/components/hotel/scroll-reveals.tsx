@@ -10,14 +10,24 @@ export function ScrollReveals() {
     if (motion.matches || !('IntersectionObserver' in window)) return;
 
     const animations: Animation[] = [];
+    const targetAnimations = new Map<HTMLElement, Animation[]>();
     const restorations: (() => void)[] = [];
     const targets: HTMLElement[] = [];
     let stopped = false;
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
-        if (!entry.isIntersecting || stopped) continue;
+        if (stopped) continue;
         const element = entry.target as HTMLElement;
-        observer.unobserve(element);
+        const existing = targetAnimations.get(element);
+        if (!entry.isIntersecting) {
+          existing?.forEach(animation => { animation.playbackRate = -1; animation.play(); });
+          continue;
+        }
+        if (existing) {
+          existing.forEach(animation => { animation.playbackRate = 1; animation.play(); });
+          continue;
+        }
+        const group: Animation[] = [];
         const words = Array.from(element.querySelectorAll<HTMLElement>('.scroll-reveal-word'));
         const bounds = element.getBoundingClientRect();
         element.dataset['scrollReveal'] = 'visible';
@@ -27,17 +37,21 @@ export function ScrollReveals() {
             // A diagonal wave, following the actual wrapped lines at every width.
             const progress = ((rect.left - bounds.left) / Math.max(bounds.width, 1)) * 0.48
               + ((rect.top - bounds.top) / Math.max(bounds.height, 1)) * 0.52;
-            animations.push(word.animate([
+            group.push(word.animate([
               { opacity: 0, filter: 'blur(7px)' },
               { opacity: 1, filter: 'blur(0px)' },
-            ], { duration: 750, delay: Math.max(0, progress) * 650, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'backwards' }));
+            ], { duration: 750, delay: Math.max(0, progress) * 650, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'both' }));
           }
         } else {
-          animations.push(element.animate([{ opacity: 0 }, { opacity: 1 }],
-            { duration: 1100, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'backwards' }));
+          group.push(element.animate([
+            { opacity: 0, translate: '0 24px' },
+            { opacity: 1, translate: '0 0px' },
+          ], { duration: 800, delay: 180, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'both' }));
         }
+        targetAnimations.set(element, group);
+        animations.push(...group);
       }
-    }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
+    }, { threshold: 0, rootMargin: '-6% 0px -10% 0px' });
 
     const stop = () => {
       stopped = true;
@@ -83,7 +97,11 @@ export function ScrollReveals() {
           }
           if (element.querySelector('.scroll-reveal-word')) targets.push(element);
         });
-        root.querySelectorAll<HTMLElement>('.editorial-image img, .hero > img').forEach(image => targets.push(image));
+        root.querySelectorAll<HTMLElement>('.editorial-image img, .hero > img, .suite-preview-images, .footer-symbol img').forEach(image => {
+          image.classList.add('scroll-reveal-photo');
+          restorations.push(() => image.classList.remove('scroll-reveal-photo'));
+          targets.push(image);
+        });
       });
       targets.forEach(target => {
         if (target.dataset['scrollReveal']) return;

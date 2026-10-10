@@ -216,7 +216,7 @@
 .privacy-dialog p { margin-bottom: 25px; font-size: 14px; line-height: 1.8; color: var(--muted-foreground); }
 .scroll-reveal-word { display: inline-block; }
 [data-scroll-reveal="pending"] .scroll-reveal-word,
-img[data-scroll-reveal="pending"] { opacity: 0; }
+.scroll-reveal-photo[data-scroll-reveal="pending"] { opacity: 0; }
 @media (min-width: 768px) and (max-width: 1100px) {
   .page-container { padding: 0 32px; }
   .site-header { padding: 0 32px; }
@@ -334,5 +334,5 @@ img[data-scroll-reveal="pending"] { opacity: 0; }
   html { scroll-behavior: auto; }
   *,*::before,*::after { animation: none !important; transition: none !important; }
   [data-scroll-reveal="pending"] .scroll-reveal-word,
-  img[data-scroll-reveal="pending"] { opacity: 1; filter: none; }
+  .scroll-reveal-photo[data-scroll-reveal="pending"] { opacity: 1; filter: none; translate: none; }
 }
