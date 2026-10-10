@@ -12,4 +12,5 @@
 ## Hotel frontend architecture
 - Keep property configuration, temporary image imports, and all suite content in `src/lib/hotel.ts` so replacement photography and booking details have one source of truth.
 - Use shared editorial components in `src/components/hotel` and one SuitePage for all three static suite routes so their layouts remain consistent.
+- Mount the shared ScrollReveals enhancement once in the root layout; observe text and static images on each navigation, restore text nodes on cleanup, and respect reduced motion so content and layout stay unchanged.
 - Keep the five content routes public and frontend-only; reservations always open the configured external booking URL, never an internal booking flow.
