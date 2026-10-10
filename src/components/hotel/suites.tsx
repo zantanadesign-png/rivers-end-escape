@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { ArrowUpRight, Armchair, BedDouble, BookOpen, Coffee, CookingPot, GlassWater, Laptop, Microwave, Refrigerator, ShowerHead, Shirt, Sofa, Sparkles, Table2, Trees, Tv, Utensils, Wifi } from 'lucide-react';
 import { type HotelImage, type Suite } from '@/lib/hotel';
 import { EditorialImage, SectionHeading, BookButton, CTASection } from './editorial';
+import { ScrollReveals } from './scroll-reveals';
 
 const faqs = [
   ['Is there a minimum or maximum stay requirement?', 'Our minimum stay is typically two nights, though exceptions may be possible. We do not enforce a maximum stay, so guests are welcome to extend their time with us as long as there is availability.'],
@@ -54,6 +55,7 @@ export function SuitePage({ suite }: { suite: Suite }) {
   const middleImages = [suite.heroImages[1], suite.galleryImages[0]].filter((image): image is HotelImage => Boolean(image));
   const finalImages = suite.galleryImages.slice(1, 3);
   return <main className="page-container suite-page">
+    <ScrollReveals />
     {coverImage && <EditorialImage {...coverImage} className="suite-cover-image reveal" eager />}
     <section className="suite-intro"><div><span className="eyebrow">YOUR PRIVATE RETREAT · PORTLAND, JAMAICA</span><h1 className="suite-title">{suiteTitle}</h1></div><div><div className="editorial-copy">{suite.longDescription.map(text => <p key={text}>{text}</p>)}</div><BookButton /></div></section>
     <div className="image-pair suite-gallery">{middleImages.map(image => <EditorialImage key={image.src} {...image} />)}</div>
