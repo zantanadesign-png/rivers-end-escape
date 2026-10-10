@@ -20,7 +20,7 @@ export function ScrollReveals() {
         observer.unobserve(element);
         const words = Array.from(element.querySelectorAll<HTMLElement>('.scroll-reveal-word'));
         const bounds = element.getBoundingClientRect();
-        element.dataset.scrollReveal = 'visible';
+        element.dataset['scrollReveal'] = 'visible';
         if (words.length) {
           for (const word of words) {
             const rect = word.getBoundingClientRect();
@@ -42,15 +42,20 @@ export function ScrollReveals() {
     const stop = () => {
       stopped = true;
       observer.disconnect();
+      contentObserver.disconnect();
       animations.forEach(animation => animation.cancel());
-      targets.forEach(target => delete target.dataset.scrollReveal);
+      targets.forEach(target => delete target.dataset['scrollReveal']);
       restorations.forEach(restore => restore());
     };
 
-    const frame = requestAnimationFrame(() => {
+    const prepared = new WeakSet<HTMLElement>();
+    const prepare = () => {
+      if (stopped) return;
       const scope = 'main, .contact-section, .site-footer';
       const selector = 'h1, h2, h3, p, .eyebrow, .hero-eyebrow, .hero-location, .hero-index, .suite-number, .activity-number, .activity-location, .amenities-list li > span';
       document.querySelectorAll<HTMLElement>(scope).forEach(root => {
+        if (prepared.has(root)) return;
+        prepared.add(root);
         root.querySelectorAll<HTMLElement>(selector).forEach(element => {
           if (element.closest('nav, button, a') || element.querySelector('input, textarea')) return;
           const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
@@ -80,8 +85,16 @@ export function ScrollReveals() {
         });
         root.querySelectorAll<HTMLElement>('.editorial-image img, .hero > img').forEach(image => targets.push(image));
       });
-      targets.forEach(target => { target.dataset.scrollReveal = 'pending'; observer.observe(target); });
-    });
+      targets.forEach(target => {
+        if (target.dataset['scrollReveal']) return;
+        target.dataset['scrollReveal'] = 'pending';
+        observer.observe(target);
+      });
+    };
+    // Route content can arrive after the shared layout hydrates.
+    const contentObserver = new MutationObserver(prepare);
+    contentObserver.observe(document.body, { childList: true, subtree: true });
+    const frame = requestAnimationFrame(prepare);
 
     const onMotionChange = () => { if (motion.matches) { cancelAnimationFrame(frame); stop(); } };
     motion.addEventListener('change', onMotionChange);
