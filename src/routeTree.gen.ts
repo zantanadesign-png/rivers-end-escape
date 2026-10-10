@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ThingsToDoRouteImport } from './routes/things-to-do'
 import { Route as SuitesSlugRouteImport } from './routes/suites.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ThingsToDoRoute = ThingsToDoRouteImport.update({
+  id: '/things-to-do',
+  path: '/things-to-do',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SuitesSlugRoute = SuitesSlugRouteImport.update({
   id: '/suites/$slug',
   path: '/suites/$slug',
@@ -32,30 +38,34 @@ const SuitesSlugRoute = SuitesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/things-to-do': typeof ThingsToDoRoute
   '/suites/$slug': typeof SuitesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/things-to-do': typeof ThingsToDoRoute
   '/suites/$slug': typeof SuitesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/things-to-do': typeof ThingsToDoRoute
   '/suites/$slug': typeof SuitesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/suites/$slug'
+  fullPaths: '/' | '/about' | '/things-to-do' | '/suites/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/suites/$slug'
-  id: '__root__' | '/' | '/about' | '/suites/$slug'
+  to: '/' | '/about' | '/things-to-do' | '/suites/$slug'
+  id: '__root__' | '/' | '/about' | '/things-to-do' | '/suites/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ThingsToDoRoute: typeof ThingsToDoRoute
   SuitesSlugRoute: typeof SuitesSlugRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/things-to-do': {
+      id: '/things-to-do'
+      path: '/things-to-do'
+      fullPath: '/things-to-do'
+      preLoaderRoute: typeof ThingsToDoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/suites/$slug': {
       id: '/suites/$slug'
       path: '/suites/$slug'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ThingsToDoRoute: ThingsToDoRoute,
   SuitesSlugRoute: SuitesSlugRoute,
 }
 export const routeTree = rootRouteImport

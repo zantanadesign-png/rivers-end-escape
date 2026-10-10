@@ -3,17 +3,16 @@ import { Link, useRouterState } from '@tanstack/react-router';
 import { ArrowUpRight, ChevronDown, MapPin, Mail, Phone, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookButton } from './editorial';
-import { hotelConfig } from '@/lib/hotel';
+import { hotelConfig, suites } from '@/lib/hotel';
+import riversEndSymbol from '@/assets/rivers-end-footer.svg';
+import riversEndNavbar from '@/assets/rivers-end-navbar.svg';
 
 function Wordmark() {
-  return <Link to="/" className="wordmark" aria-label="Rivers End - Guesthouse home"><span className="wordmark-line" /><span className="wordmark-name">Rivers End</span><span className="wordmark-subtitle">GUESTHOUSE · JAMAICA</span></Link>;
-}
-function LanguageSelector() {
-  const [open, setOpen] = useState(false);
-  return <div className="language"><Button variant="quiet" className="language-button" aria-label="Language: English" aria-expanded={open} onClick={() => setOpen(!open)}>EN <ChevronDown size={12} /></Button>{open && <div className="language-panel">English <span aria-hidden="true">✓</span></div>}</div>;
+  return <Link to="/" className="wordmark" aria-label="Rivers End - Guesthouse home"><img src={riversEndNavbar} alt="Rivers End Guesthouse Jamaica" /></Link>;
 }
 export function MobileMenu({ onClose }: { onClose: () => void }) {
   const menuRef = useRef<HTMLDivElement>(null);
+  const [suitesOpen, setSuitesOpen] = useState(false);
   useEffect(() => {
     const previous = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -29,22 +28,20 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
     document.addEventListener('keydown', keyboard);
     return () => { document.body.style.overflow = previous; document.removeEventListener('keydown', keyboard); };
   }, [onClose]);
-  return <div ref={menuRef} id="mobile-menu" className="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu"><nav><Link to="/" hash="suites" onClick={onClose}>Suites</Link><Link to="/about" onClick={onClose}>About</Link><a href={hotelConfig.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={onClose}>Book now <ArrowUpRight className="inline size-8" strokeWidth={1} /></a></nav><p className="menu-location">{hotelConfig.location.toUpperCase()}</p></div>;
+  return <div ref={menuRef} id="mobile-menu" className="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu"><nav><Link to="/" onClick={onClose}>Home</Link><div className="mobile-suite-nav"><button className="mobile-nav-toggle" aria-expanded={suitesOpen} onClick={() => setSuitesOpen(!suitesOpen)}>Suites <ChevronDown size={20} /></button>{suitesOpen && <div className="mobile-suite-links">{suites.map(suite => <Link key={suite.slug} to="/suites/$slug" params={{ slug: suite.slug }} onClick={onClose}>{suite.name}</Link>)}</div>}</div><Link to="/things-to-do" onClick={onClose}>Things to do</Link><Link to="/about" onClick={onClose}>About</Link><a href={hotelConfig.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={onClose}>Book now <ArrowUpRight className="inline size-8" strokeWidth={1} /></a></nav><p className="menu-location">{hotelConfig.location.toUpperCase()}</p></div>;
 }
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [suitesOpen, setSuitesOpen] = useState(false);
   const pathname = useRouterState({ select: s => s.location.pathname });
   const trigger = useRef<HTMLButtonElement>(null);
-  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => { setOpen(false); setSuitesOpen(false); }, [pathname]);
   const close = () => { setOpen(false); trigger.current?.focus(); };
-  return <><header className="site-header"><Wordmark /><div className="mobile-language"><LanguageSelector /></div><nav className="desktop-nav" aria-label="Main navigation"><Link to="/" hash="suites" className="text-link">Suites</Link><Link to="/about" className="text-link">About</Link><BookButton /><LanguageSelector /></nav><Button ref={trigger} variant="quiet" className="menu-trigger" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button></header>{open && <MobileMenu onClose={close} />}</>;
+  return <><header className="site-header"><nav className="desktop-nav desktop-nav-left" aria-label="Primary navigation"><Link to="/about" className="text-link">About</Link><Link to="/things-to-do" className="text-link">Things to do</Link></nav><Wordmark /><nav className="desktop-nav desktop-nav-right" aria-label="Booking navigation"><div className="suite-dropdown" onMouseEnter={() => setSuitesOpen(true)} onMouseLeave={() => setSuitesOpen(false)}><div className="suite-dropdown-trigger"><Link to="/" hash="suites" className="text-link">Suites</Link><button aria-label="Show suite options" aria-expanded={suitesOpen} onClick={() => setSuitesOpen(!suitesOpen)}><ChevronDown size={15} /></button></div>{suitesOpen && <div className="suite-dropdown-menu">{suites.map(suite => <Link key={suite.slug} to="/suites/$slug" params={{ slug: suite.slug }} onClick={() => setSuitesOpen(false)}>{suite.name}</Link>)}</div>}</div><BookButton /></nav><Button ref={trigger} variant="quiet" className="menu-trigger" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button></header>{open && <MobileMenu onClose={close} />}</>;
 }
 export function MobileBookingBar() {
   return <div className="mobile-booking-bar" aria-label="Quick booking"><span className="booking-icon" title={hotelConfig.location}><MapPin aria-hidden="true" /></span><span className="booking-icon" title="Email"><Mail aria-hidden="true" /></span><span className="booking-icon" title="Telephone"><Phone aria-hidden="true" /></span><BookButton variant="booking" /></div>;
 }
 export function Footer() {
-  const [privacy, setPrivacy] = useState(false);
-  const closeRef = useRef<HTMLButtonElement>(null);
-  useEffect(() => { if (privacy) closeRef.current?.focus(); }, [privacy]);
-  return <><footer className="site-footer"><div className="footer-top"><Wordmark /><nav className="footer-nav" aria-label="Footer navigation"><Link to="/" hash="suites">Suites</Link><Link to="/about">About</Link><a href={hotelConfig.bookingUrl} target="_blank" rel="noopener noreferrer">Book now ↗</a></nav></div><div className="footer-bottom"><span>© 2026 {hotelConfig.hotelName}</span><span>{hotelConfig.location}</span><div className="footer-secondary">{hotelConfig.instagramUrl ? <a href={hotelConfig.instagramUrl} target="_blank" rel="noopener noreferrer">Instagram ↗</a> : <span>Instagram</span>}<Button variant="quiet" className="footer-control" onClick={() => setPrivacy(true)}>Privacy Policy</Button></div></div></footer>{privacy && <div className="privacy-dialog" role="dialog" aria-modal="true" aria-label="Privacy Policy" onClick={() => setPrivacy(false)} onKeyDown={e => { if (e.key === 'Escape') setPrivacy(false); }}><div onClick={e => e.stopPropagation()}><h2>Privacy Policy</h2><p>This website has no reservation forms or guest accounts. Reservations open on an external booking platform, whose own privacy policy applies. External font services may receive technical request information when this page loads.</p><Button ref={closeRef} variant="editorial" onClick={() => setPrivacy(false)}>Close <X /></Button></div></div>}</>;
+  return <footer className="site-footer"><div className="footer-layout"><Link to="/" className="footer-symbol" aria-label="Rivers End - Guesthouse home"><img src={riversEndSymbol} alt="Rivers End" /></Link><div className="footer-left"><nav className="footer-nav" aria-label="Footer navigation"><Link to="/">Home</Link><Link to="/" hash="suites">Suites</Link><Link to="/things-to-do">Things to do</Link><Link to="/about">About</Link><a href={hotelConfig.bookingUrl} target="_blank" rel="noopener noreferrer">Book now ↗</a></nav><div className="footer-contact"><a href={`mailto:${hotelConfig.email}`}><Mail size={16} />{hotelConfig.email}</a><span><MapPin size={16} />{hotelConfig.address}</span><a href="tel:+18764247568"><Phone size={16} />{hotelConfig.phone} (Jamaica)</a><a href="https://wa.me/12404622923" target="_blank" rel="noopener noreferrer"><Phone size={16} />{hotelConfig.whatsapp} (WhatsApp)</a><a href={hotelConfig.instagramUrl} target="_blank" rel="noopener noreferrer">Instagram ↗</a></div><div className="footer-bottom"><span>© 2026 {hotelConfig.hotelName}</span></div></div></div></footer>;
 }

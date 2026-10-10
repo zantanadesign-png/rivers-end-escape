@@ -1,7 +1,34 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { images, hotelConfig, pageHead } from '@/lib/hotel';
-import { EditorialImage, SectionHeading, CTASection } from '@/components/hotel/editorial';
-export const Route = createFileRoute('/about')({ head: () => pageHead('Our story', 'The story and philosophy of Rivers End - Guesthouse in Portland, Jamaica. Personal hospitality, considered design and a connection to nature.'), component: AboutPage });
+import { images, pageHead } from '@/lib/hotel';
+import { EditorialImage, EditorialHero, SectionHeading, CTASection } from '@/components/hotel/editorial';
+
+export const Route = createFileRoute('/about')({
+  head: () => pageHead('About Rivers End', 'The story of Rivers End, a family-created guesthouse in Portland, Jamaica, shaped by thoughtful design, nature and a slower pace of life.'),
+  component: AboutPage,
+});
+
 function AboutPage() {
-  return <main className="page-container"><section className="hero about-hero reveal"><img src={images.veranda} alt="Concept of the Rivers End veranda surrounded by nature" width={1024} height={1536} fetchPriority="high" /><div className="hero-content"><span className="hero-eyebrow">OUR STORY</span><h1>A stay shaped<br />by its <em>surroundings.</em></h1><span className="hero-location">RIVERS END · PORTLAND, JAMAICA</span></div></section><section className="about-story"><SectionHeading eyebrow="ROOTED IN PLACE">A place with<br />a story <em>to tell.</em></SectionHeading><div className="editorial-copy"><p>{hotelConfig.hotelName} was created from a simple idea: that where you stay should feel as meaningful as what you do while you are there.</p><p>Rooted in its surroundings and shaped by a love of thoughtful design, the property brings together architecture, nature and hospitality in a setting designed to feel personal rather than conventional.</p></div></section><section className="about-philosophy"><EditorialImage src={images.retreat} alt="Concept of the guesthouse’s peaceful tropical garden" /><div><SectionHeading eyebrow="OUR PHILOSOPHY">Designed for<br /><em>slower days.</em></SectionHeading><p className="editorial-copy">Here, hospitality is intentionally personal. Every detail is considered to create an atmosphere where guests can disconnect from the pace of everyday life and reconnect with the simple pleasures of being somewhere beautiful.</p></div></section><section className="about-design"><SectionHeading eyebrow="A NATURAL CONNECTION">Where design<br />meets <em>nature.</em></SectionHeading><p className="editorial-copy">Natural materials, thoughtful interiors and a strong connection to the surrounding landscape define the experience of staying here.</p><div className="image-pair"><EditorialImage src={images.river} alt="Concept of thoughtful natural interiors" /><EditorialImage src={images.canopy} alt="Concept of the landscape framed by timber shutters" /></div></section><CTASection title={<>Stay <em>awhile.</em></>} copy="Discover the suite that feels right for you." /></main>;
+  return (
+    <main className="page-container">
+      <EditorialHero className="about-hero" src={images.veranda} alt="A welcoming veranda at Rivers End in Portland, Jamaica" eyebrow="OUR STORY" title={<>About<br /><em>Rivers End.</em></>} location="" />
+
+      <section className="about-story">
+        <SectionHeading eyebrow="WELCOME">A place to<br /><em>feel at home.</em></SectionHeading>
+        <div className="editorial-copy">
+          <p>Welcome to Rivers End, our serene escape nestled in the heart of Portland. We’re delighted to share this place with you.</p>
+          <p>Rivers End was created by a mother and her daughters, born from a shared love of this land, its rhythm, and its capacity to inspire presence. Our guesthouse is our way of inviting you into a slower pace of life, one where every moment can be savored, and the ordinary becomes memorable.</p>
+        </div>
+      </section>
+
+      <section className="about-philosophy">
+        <EditorialImage src={images.retreat} alt="The peaceful, tropical surroundings of Rivers End" />
+        <div>
+          <SectionHeading eyebrow="OUR PHILOSOPHY">Thoughtful by<br /><em>design.</em></SectionHeading>
+          <p className="editorial-copy">Every detail of Rivers End, from the spaces where you’ll rest, to the experiences we’ve woven into your stay, is designed to feel thoughtful, intentional, and connected to the culture and natural beauty of Portland. We’ve curated each corner with care, so you can step away from the noise of daily life and fully embrace your time here.</p>
+        </div>
+      </section>
+
+      <CTASection title={<>Stay <em>awhile.</em></>} copy="Discover the suite that feels right for you." />
+    </main>
+  );
 }
