@@ -14,7 +14,6 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header, MobileBookingBar, Footer } from "@/components/hotel/navigation";
 import { ContactSection } from "@/components/hotel/contact";
-import { ScrollReveals } from "@/components/hotel/scroll-reveals";
 
 function NotFoundComponent() {
   return (
@@ -122,7 +121,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ScrollReveals />
       <Header />
       <Outlet />
       <ContactSection />

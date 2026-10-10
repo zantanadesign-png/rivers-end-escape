@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { images, pageHead } from '@/lib/hotel';
 import { EditorialImage, EditorialHero, SectionHeading, CTASection } from '@/components/hotel/editorial';
+import { ScrollReveals } from '@/components/hotel/scroll-reveals';
 
 export const Route = createFileRoute('/about')({
   head: () => pageHead('About Rivers End', 'The story of Rivers End, a family-created guesthouse in Portland, Jamaica, shaped by thoughtful design, nature and a slower pace of life.'),
@@ -10,6 +11,7 @@ export const Route = createFileRoute('/about')({
 function AboutPage() {
   return (
     <main className="page-container">
+      <ScrollReveals />
       <EditorialHero className="about-hero" src={images.veranda} alt="A welcoming veranda at Rivers End in Portland, Jamaica" eyebrow="OUR STORY" title={<>About<br /><em>Rivers End.</em></>} location="" />
 
       <section className="about-story">

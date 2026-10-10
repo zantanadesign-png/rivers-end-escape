@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { activities, images, pageHead } from '@/lib/hotel';
 import { EditorialHero, EditorialImage, SectionHeading } from '@/components/hotel/editorial';
+import { ScrollReveals } from '@/components/hotel/scroll-reveals';
 
 export const Route = createFileRoute('/things-to-do')({
   head: () => pageHead('Things to do in Portland, Jamaica', 'Discover beaches, waterfalls, rafting, diving and more around Portland, Jamaica.'),
@@ -9,6 +10,7 @@ export const Route = createFileRoute('/things-to-do')({
 
 function ThingsToDoPage() {
   return <main className="page-container things-page">
+    <ScrollReveals />
     <EditorialHero className="things-hero" src={images.retreat} alt="Tropical greenery at Rivers End in Portland, Jamaica" eyebrow="EXPLORE PORTLAND" title={<>Things to do in<br /><em>Portland, Jamaica.</em></>} location="" />
     <section className="activities-section">
       <div className="activities-heading"><SectionHeading eyebrow="THE ISLAND, AT YOUR PACE">Make time<br />for <em>something.</em></SectionHeading><p className="editorial-copy">From the mountains and rivers to the sea, discover some of the experiences that make Portland unforgettable.</p></div>

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { images, hotelConfig, suites, pageHead } from '@/lib/hotel';
 import { EditorialImage, EditorialHero, SectionHeading, BookButton } from '@/components/hotel/editorial';
 import { SuitePreview } from '@/components/hotel/suites';
+import { ScrollReveals } from '@/components/hotel/scroll-reveals';
 
 export const Route = createFileRoute('/')({
   head: () => pageHead('A quieter way to stay', 'Discover Rivers End, an intimate guesthouse in Portland, Jamaica, created as a thoughtful escape from the everyday.'),
@@ -13,6 +14,7 @@ export const Route = createFileRoute('/')({
 function HomePage() {
   return (
     <main className="page-container">
+      <ScrollReveals />
       <EditorialHero src={images.retreat} alt="Rivers End guesthouse surrounded by tropical greenery in Portland, Jamaica" eyebrow="RIVERS END — A PRIVATE RETREAT" title={<>A quieter way<br />to <em>stay.</em></>} description="A place to slow down, retreat and immerse yourself." action={<Button asChild variant="photo"><a href="#suites">Discover the suites <ArrowDown size={15} /></a></Button>} location="PORTLAND, JAMAICA" index="Stay. Connect. Transform." />
 
       <section className="introduction">
