@@ -361,18 +361,33 @@
 
 /* Desktop: one 40px spacing system for section edges and layout gaps. */
 @media (min-width: 1101px) {
-  .page-container { padding-left: 40px; padding-right: 40px; }
+  .page-container { padding-left: 0; padding-right: 0; }
   .site-header { padding-left: 40px; padding-right: 40px; }
   .site-footer { padding: 40px; }
-  .page-container > section:not(.hero) { padding: 40px 0; }
+  .page-container > .hero { margin: 0 40px; }
+  .page-container > section:not(.hero) { margin: 0; padding: 40px; }
   .contact-section { padding: 40px; }
 
   .introduction,.suites-heading,.suite-preview,.story-preview,.about-story,.about-philosophy,.suite-intro,.activities-heading,.activity-feature,.contact-section,.footer-layout { gap: 40px; }
   .image-pair,.about-design .image-pair,.suite-gallery,.faq-grid,.contact-name-fields { gap: 40px; }
 
+  .suite-preview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .suite-preview:nth-child(even) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contact-section { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
   .suites-heading,.activity-feature { margin-bottom: 40px; }
-  .suite-preview { margin-bottom: 40px; }
-  .suite-preview:last-child { margin-bottom: 0; }
+  .suite-preview { margin: 0; padding: 20px 0; }
+
+  .suites-section > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .suites-section > div:last-child > .suite-preview {
+    margin-bottom: 0;
+  }
+
   .about-hero { margin-bottom: 40px; }
   .suite-gallery-final,.amenities-section,.faq-section { margin-top: 40px; }
   .suite-gallery .editorial-image:last-child { margin-top: 0; }
