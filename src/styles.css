@@ -358,3 +358,31 @@
   .suite-preview:last-child { margin-bottom: 0; }
   .suite-preview-images { margin-bottom: 16px; }
 }
+
+/* Desktop: one 40px spacing system for section edges and layout gaps. */
+@media (min-width: 1101px) {
+  .page-container { padding-left: 40px; padding-right: 40px; }
+  .site-header { padding-left: 40px; padding-right: 40px; }
+  .site-footer { padding: 40px; }
+  .page-container > section:not(.hero) { padding: 40px 0; }
+  .contact-section { padding: 40px; }
+
+  .introduction,.suites-heading,.suite-preview,.story-preview,.about-story,.about-philosophy,.suite-intro,.activities-heading,.activity-feature,.contact-section,.footer-layout { gap: 40px; }
+  .image-pair,.about-design .image-pair,.suite-gallery,.faq-grid,.contact-name-fields { gap: 40px; }
+
+  .suites-heading,.activity-feature { margin-bottom: 40px; }
+  .suite-preview { margin-bottom: 40px; }
+  .suite-preview:last-child { margin-bottom: 0; }
+  .about-hero { margin-bottom: 40px; }
+  .suite-gallery-final,.amenities-section,.faq-section { margin-top: 40px; }
+  .suite-gallery .editorial-image:last-child { margin-top: 0; }
+
+  .intro-text .editorial-copy,.story-preview .editorial-copy { margin: 40px 0; }
+  .about-philosophy .editorial-copy { margin-top: 40px; }
+  .editorial-copy p + p { margin-top: 40px; }
+  .special-requests .editorial-copy,.cta-section .editorial-copy { margin: 40px auto; }
+  .contact-intro .editorial-copy { margin-top: 40px; }
+  .contact-details { gap: 40px; margin-top: 40px; }
+  .contact-form { gap: 40px; }
+  .faq-grid { margin-top: 40px; }
+}
