@@ -340,11 +340,21 @@
 /* Shared section spacing */
 @media (min-width: 1101px) {
   .page-container > section:not(.hero), .contact-section { padding: 48px; }
+  .suites-heading { margin-bottom: 48px; }
+  .suite-preview { gap: 48px; margin-bottom: 48px; }
+  .suite-preview:last-child { margin-bottom: 0; }
 }
 @media (min-width: 768px) and (max-width: 1100px) {
   .page-container > section:not(.hero), .contact-section { padding: 32px; }
+  .suites-heading { margin-bottom: 32px; }
+  .suite-preview { gap: 32px; margin-bottom: 32px; }
+  .suite-preview:last-child { margin-bottom: 0; }
 }
 @media (max-width: 767px) {
   .page-container > section:not(.hero), .contact-section { padding: 16px; }
   .page-container > .special-requests { margin: 0; }
+  .suites-heading { margin-bottom: 16px; }
+  .suite-preview,.suite-preview:nth-child(even) { margin-bottom: 16px; }
+  .suite-preview:last-child { margin-bottom: 0; }
+  .suite-preview-images { margin-bottom: 16px; }
 }
