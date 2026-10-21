@@ -336,3 +336,15 @@
   [data-scroll-reveal="pending"] .scroll-reveal-word,
   .scroll-reveal-photo[data-scroll-reveal="pending"] { opacity: 1; filter: none; translate: none; }
 }
+
+/* Shared section spacing */
+@media (min-width: 1101px) {
+  .page-container > section:not(.hero), .contact-section { padding: 48px; }
+}
+@media (min-width: 768px) and (max-width: 1100px) {
+  .page-container > section:not(.hero), .contact-section { padding: 32px; }
+}
+@media (max-width: 767px) {
+  .page-container > section:not(.hero), .contact-section { padding: 16px; }
+  .page-container > .special-requests { margin: 0; }
+}
