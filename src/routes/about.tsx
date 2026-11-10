@@ -10,7 +10,7 @@ export const Route = createFileRoute('/about')({
 
 function AboutPage() {
   return (
-    <main className="page-container">
+    <main className="page-container side-padding">
       <ScrollReveals />
       <EditorialHero className="about-hero" src={images.veranda} alt="A welcoming veranda at Rivers End in Portland, Jamaica" eyebrow="OUR STORY" title={<>About<br /><em>Rivers End.</em></>} location="" />
 

@@ -9,7 +9,7 @@ export const Route = createFileRoute('/things-to-do')({
 });
 
 function ThingsToDoPage() {
-  return <main className="page-container things-page">
+  return <main className="page-container things-page side-padding">
     <ScrollReveals />
     <EditorialHero className="things-hero" src={images.retreat} alt="Tropical greenery at Rivers End in Portland, Jamaica" eyebrow="EXPLORE PORTLAND" title={<>Things to do in<br /><em>Portland, Jamaica.</em></>} location="" />
     <section className="activities-section">

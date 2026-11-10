@@ -5,7 +5,7 @@ import { SectionHeading } from '@/components/hotel/editorial';
 import { hotelConfig } from '@/lib/hotel';
 
 export function ContactSection() {
-  return <section className="contact-section page-container" id="contact">
+  return <section className="contact-section page-container side-padding" id="contact">
     <div className="contact-intro"><SectionHeading eyebrow="WE’D LOVE TO HEAR FROM YOU">Your room <em>is waiting.</em><br />Get In <em>Touch.</em></SectionHeading><p className="editorial-copy">Have a question or a special request? Get in touch and we’ll be happy to help.</p><div className="contact-details"><a href="tel:+18764247568"><strong>Phone Number</strong><span>(876) 424 7568</span></a><a href={`mailto:${hotelConfig.email}`}><strong>Email</strong><span>{hotelConfig.email}</span></a></div></div>
     <ContactForm />
   </section>;

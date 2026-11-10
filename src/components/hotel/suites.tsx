@@ -54,7 +54,7 @@ export function SuitePage({ suite }: { suite: Suite }) {
   const coverImage = suite.heroImages[0];
   const middleImages = [suite.heroImages[1], suite.galleryImages[0]].filter((image): image is HotelImage => Boolean(image));
   const finalImages = suite.galleryImages.slice(1, 3);
-  return <main className="page-container suite-page">
+  return <main className="page-container suite-page side-padding">
     <ScrollReveals />
     {coverImage && <EditorialImage {...coverImage} className="suite-cover-image reveal" eager />}
     <section className="suite-intro"><div><span className="eyebrow">YOUR PRIVATE RETREAT · PORTLAND, JAMAICA</span><h1 className="suite-title">{suiteTitle}</h1></div><div><div className="editorial-copy">{suite.longDescription.map(text => <p key={text}>{text}</p>)}</div><BookButton /></div></section>

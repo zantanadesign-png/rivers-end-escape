@@ -13,7 +13,7 @@ export const Route = createFileRoute('/')({
 
 function HomePage() {
   return (
-    <main className="page-container">
+    <main className="page-container side-padding">
       <ScrollReveals />
       <EditorialHero src={images.retreat} alt="Rivers End guesthouse surrounded by tropical greenery in Portland, Jamaica" eyebrow="RIVERS END — A PRIVATE RETREAT" title={<>A quieter way<br />to <em>stay.</em></>} description="A place to slow down, retreat and immerse yourself." action={<Button asChild variant="photo"><a href="#suites">Discover the suites <ArrowDown size={15} /></a></Button>} location="PORTLAND, JAMAICA" index="Stay. Connect. Transform." />
 

@@ -39,6 +39,7 @@
   --photo-foreground: #f4eee4;
   --photo-overlay: rgb(36 51 70 / 42%);
   --shadow-booking: 0 2px 18px rgb(36 51 70 / 12%);
+  --side-padding: 40px;
 }
 @layer base {
   * { border-color: var(--border); }
@@ -50,7 +51,7 @@
   button,a { -webkit-tap-highlight-color: transparent; }
   ::selection { background: var(--primary); color: var(--primary-foreground); }
 }
-.site-header { height: 104px; max-width: 1400px; margin: auto; padding: 0 48px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.site-header { height: 104px; max-width: 1400px; margin: auto; padding: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
 .wordmark { display: flex; align-items: center; width: 185px; }
 .wordmark img { display: block; width: 100%; height: auto; }
 .desktop-nav { display: flex; align-items: center; gap: 38px; font-size: 13px; font-weight: 400; }
@@ -64,11 +65,11 @@
 .mobile-language { display: none; }
 .menu-trigger { display: none; justify-self: end; width: 44px; padding: 0; }
 .menu-trigger svg { width: 27px; height: 27px; stroke-width: 1.2; }
-.mobile-menu { position: fixed; inset: 104px 0 0; background: var(--background); z-index: 60; display: flex; flex-direction: column; padding: 55px 16px 120px; overflow-y: auto; }
+.mobile-menu { position: fixed; inset: 104px 0 0; background: var(--background); z-index: 60; display: flex; flex-direction: column; padding: 55px 0 120px; overflow-y: auto; }
 .mobile-menu nav { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; }
 .mobile-menu nav > a { font-family: var(--font-serif); font-size: 50px; }
 .mobile-menu .menu-location { margin-top: auto; padding-top: 70px; font-size: 11px; letter-spacing: 1.5px; color: var(--muted-foreground); }
-.page-container { max-width: 1400px; padding: 0 48px; margin: 0 auto; }
+.page-container { max-width: 1400px; padding: 0; margin: 0 auto; }
 .hero { height: min(720px, calc(100svh - 180px)); min-height: 540px; position: relative; border-radius: 5px; overflow: hidden; }
 .hero > img { width: 100%; height: 100%; object-fit: cover; object-position: center 53%; }
 .hero::after { content: ''; position: absolute; inset: 0; background: var(--photo-overlay); }
@@ -130,7 +131,7 @@
 .special-requests .button,.cta-section .button { border-color: var(--primary-foreground); color: var(--primary-foreground); }
 .special-requests a[class*="border"],.cta-section a[class*="border"] { border-color: var(--primary-foreground); color: var(--primary-foreground); }
 .special-requests a[class*="border"]:hover,.cta-section a[class*="border"]:hover { background: var(--primary-foreground); color: var(--primary); }
-.contact-section { display: grid; grid-template-columns: .9fr 1.1fr; gap: 100px; align-items: start; padding: 100px 48px; }
+.contact-section { display: grid; grid-template-columns: .9fr 1.1fr; gap: 100px; align-items: start; padding: 100px 0; }
 .contact-intro .editorial-copy { max-width: 400px; margin-top: 25px; }
 .contact-details { display: grid; gap: 22px; margin-top: 38px; }
 .contact-details a { display: grid; gap: 7px; font-size: 13px; color: var(--muted-foreground); }
@@ -142,7 +143,7 @@
 .contact-form input:focus,.contact-form textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
 .contact-form textarea { resize: vertical; min-height: 130px; }
 .contact-name-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.site-footer { max-width: 1400px; margin: 0 auto; padding: 52px 48px 30px; }
+.site-footer { max-width: 1400px; margin: 0 auto; padding: 52px 0 30px; }
 .footer-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 60px; align-items: stretch; }
 .footer-left { display: flex; flex-direction: column; align-items: stretch; }
 .footer-symbol { display: flex; align-items: stretch; justify-content: flex-start; min-height: 265px; }
@@ -217,26 +218,27 @@
 .scroll-reveal-word { display: inline-block; }
 [data-scroll-reveal="pending"] .scroll-reveal-word,
 .scroll-reveal-photo[data-scroll-reveal="pending"] { opacity: 0; }
+
+/* Universal side gutter: one value, every breakpoint, every section. */
+.side-padding { padding-left: var(--side-padding); padding-right: var(--side-padding); }
 @media (min-width: 768px) and (max-width: 1100px) {
-  .page-container { padding: 0 32px; }
-  .site-header { padding: 0 32px; }
+  :root { --side-padding: 32px; }
   .introduction,.suites-heading,.suite-preview,.story-preview,.about-story,.about-philosophy,.suite-intro,.activities-heading,.activity-feature { gap: 45px; }
   .section-heading { font-size: 56px; }
-  .site-footer { margin: 0; padding-left: 32px; padding-right: 32px; }
-  .contact-section { padding-left: 32px; padding-right: 32px; }
+  .site-footer { margin: 0; }
 }
 @media (max-width: 767px) {
+  :root { --side-padding: 20px; }
   html { scroll-padding-top: 95px; }
-  .site-header { position: sticky; top: 0; z-index: 70; height: 78px; grid-template-columns: 1fr auto; padding: 0 16px; background: var(--background); }
+  .site-header { position: sticky; top: 0; z-index: 70; height: 78px; grid-template-columns: 1fr auto; background: var(--background); }
   .site-header > .wordmark { grid-column: 1; grid-row: 1; justify-self: start; }
   .wordmark { width: 148px; }
   .desktop-nav { display: none; }
   .menu-trigger { display: flex; justify-self: end; width: 40px; padding: 0; }
   .menu-trigger svg { width: 29px; height: 29px; stroke-width: 1; }
-  .page-container { padding: 0 16px; }
   .hero { height: min(680px, calc(100svh - 158px)); min-height: 550px; }
   .hero > img { object-position: 55% center; }
-  .hero-content { padding: 22px; }
+  .hero-content { padding: var(--side-padding); }
   .hero-eyebrow { font-size: 8px; letter-spacing: 2px; margin-bottom: 26px; }
   .hero h1 { font-size: 64px; line-height: 1.03; }
   .hero-above-heading { padding: 12px 0 30px; }
@@ -257,7 +259,7 @@
   .intro-text .editorial-copy p:nth-child(2) { display: none; }
   .suites-section { padding-top: 65px; }
   .suites-heading { display: block; text-align: center; margin-bottom: 50px; }
-  .suites-heading .editorial-copy { margin: 26px auto 0; padding: 0 8px; }
+  .suites-heading .editorial-copy { margin: 26px auto 0; }
   .suite-preview,.suite-preview:nth-child(even) { display: block; margin-bottom: 65px; }
   .suite-preview-images { padding: 0; margin-bottom: 32px; }
   .suite-number { font-size: 14px; margin-bottom: 14px; }
@@ -267,13 +269,11 @@
   .story-preview > div { width: 100%; }
   .story-preview .editorial-image { aspect-ratio: 4/5; }
   .story-preview .editorial-copy { margin: 25px 0; }
-  .special-requests { padding: 65px 24px; margin: 0 -16px; }
   .special-requests .section-heading { font-size: 55px; }
   .special-requests .editorial-copy { margin: 27px auto; }
-  .cta-section { padding: 80px 5px; }
   .cta-section .section-heading { font-size: 60px; }
   .cta-section .editorial-copy { margin: 25px auto 28px; max-width: 270px; }
-  .site-footer { margin: 0; padding: 40px 16px 110px; }
+  .site-footer { margin: 0; padding: 40px var(--side-padding) 110px; }
   .footer-layout { display: flex; flex-direction: column; gap: 0; }
   .footer-symbol { align-self: center; width: 80px; min-height: 110px; }
   .footer-symbol img { max-width: 80px; }
@@ -281,7 +281,7 @@
   .footer-contact { order: 1; justify-items: center; gap: 16px; padding: 30px 0 0; text-align: center; }
   .footer-bottom { order: 2; align-self: center; flex-direction: column-reverse; align-items: center; gap: 16px; margin-top: 0; padding-top: 28px; text-align: center; }
   .footer-nav { order: 3; align-self: center; flex-direction: column; align-items: center; gap: 16px; margin-top: 34px; }
-  .mobile-booking-bar { position: fixed; z-index: 90; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(3,minmax(0,1fr)) minmax(128px,1.55fr); gap: 5px; border-radius: 40px; padding: 5px; background: var(--background); box-shadow: var(--shadow-booking); border: 1px solid var(--secondary); }
+  .mobile-booking-bar { position: fixed; z-index: 90; left: var(--side-padding); right: var(--side-padding); bottom: max(10px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(3,minmax(0,1fr)) minmax(128px,1.55fr); gap: 5px; border-radius: 40px; padding: 5px; background: var(--background); box-shadow: var(--shadow-booking); border: 1px solid var(--secondary); }
   .booking-icon { display: grid; place-items: center; background: var(--background); border-radius: 40px; height: 44px; color: var(--foreground); }
   .booking-icon svg { width: 20px; height: 20px; stroke-width: 1; }
   .mobile-booking-bar a { height: 44px; padding: 0 13px; font-size: 13px; }
@@ -306,7 +306,7 @@
   .amenities-section { margin-top: 60px; }
   .amenities-section .section-heading { font-size: 43px; margin-bottom: 20px; }
   .amenities-list { display: block; }
-  .amenities-list li { padding: 20px 6px; }
+  .amenities-list li { padding: 20px 0; }
   .activities-section { padding: 65px 0 0; }
   .activities-heading { display: block; text-align: center; margin-bottom: 55px; }
   .activities-heading .editorial-copy { margin: 24px auto 0; max-width: 300px; }
@@ -319,7 +319,7 @@
   .activity-copy h2 { font-size: 45px; margin-bottom: 17px; }
   .activity-image { aspect-ratio: 4/5; }
   .things-hero h1 { font-size: 54px; }
-  .contact-section { display: block; padding: 65px 16px; }
+  .contact-section { display: block; padding: 65px var(--side-padding); }
   .contact-details { margin: 28px 0 35px; }
   .contact-name-fields { gap: 12px; }
   .contact-form { gap: 18px; }
@@ -345,13 +345,14 @@
   .suite-preview:last-child { margin-bottom: 0; }
 }
 @media (min-width: 768px) and (max-width: 1100px) {
-  .page-container > section:not(.hero), .contact-section { padding: 32px; }
+  .page-container > section:not(.hero), .contact-section { padding: var(--side-padding); }
   .suites-heading { margin-bottom: 32px; }
   .suite-preview { gap: 32px; margin-bottom: 32px; }
   .suite-preview:last-child { margin-bottom: 0; }
 }
 @media (max-width: 767px) {
-  .page-container > section:not(.hero), .contact-section { padding: 16px; }
+  .page-container > section:not(.hero) { padding: 16px 0; }
+  .contact-section { padding: 16px var(--side-padding); }
   .page-container > .special-requests { margin: 0; }
   .suites-heading { margin-bottom: 16px; }
   .suite-preview,.suite-preview:nth-child(even) { margin-bottom: 16px; }
@@ -362,11 +363,10 @@
 /* Desktop: one 40px spacing system for section edges and layout gaps. */
 @media (min-width: 1101px) {
   .page-container { padding-left: 0; padding-right: 0; }
-  .site-header { padding-left: 40px; padding-right: 40px; }
-  .site-footer { padding: 40px; }
-  .page-container > .hero { margin: 0 40px; }
-  .page-container > section:not(.hero) { margin: 0; padding: 40px; }
-  .contact-section { padding: 40px; }
+  .site-footer { padding: var(--side-padding); }
+  .page-container > .hero { margin: 0 var(--side-padding); }
+  .page-container > section:not(.hero) { margin: 0; padding: var(--side-padding); }
+  .contact-section { padding: var(--side-padding); }
 
   .introduction,.suites-heading,.suite-preview,.story-preview,.about-story,.about-philosophy,.suite-intro,.activities-heading,.activity-feature,.contact-section,.footer-layout { gap: 40px; }
   .image-pair,.about-design .image-pair,.suite-gallery,.faq-grid,.contact-name-fields { gap: 40px; }

@@ -5,4 +5,5 @@
 - [x] Verify navigation, booking links, and desktop/mobile layouts.
 - [x] Add and verify scroll-triggered diagonal blur reveals for text and fades for static photos without changing sections or copy.
 - [x] Make text reveals reversible and repeatable; fade and slide all content photos upward with a short delay, including suite slideshows, and verify returning to the top and reduced motion.
+- [x] Set a single universal side gutter: 20px on mobile across every section, nav bar, mobile menu, footer and booking bar; 32px tablet, 40px desktop.
 - [ ] Replace temporary booking URL, suite names, example amenities and conceptual photography with owner-supplied details before launch. Blocked: these details have not been supplied.
