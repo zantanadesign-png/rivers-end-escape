@@ -401,3 +401,7 @@
   .contact-form { gap: 40px; }
   .faq-grid { margin-top: 40px; }
 }
+
+/* Section edges only; inner gaps and navigation spacing stay unchanged. */
+.page-container > section, .page-container > section:not(.hero), .contact-section { padding-top: 40px; padding-bottom: 40px; }
+.page-container > .hero::after, .page-container > .hero .hero-content { top: 40px; bottom: 40px; }
