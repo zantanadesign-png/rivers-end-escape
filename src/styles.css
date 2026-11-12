@@ -249,7 +249,7 @@
   .hero-location { left: 20px; bottom: 20px; font-size: 8px; letter-spacing: 1.6px; }
   .hero-index { right: 20px; bottom: 18px; font-size: 15px; }
   .section-heading { font-size: 49px; line-height: 1.07; }
-  .eyebrow { font-size: 9px; margin-bottom: 18px; }
+  .eyebrow { font-size: 9px; margin-bottom: 20px; }
   .editorial-copy { font-size: 14px; line-height: 1.9; }
   .introduction { display: flex; flex-direction: column; padding-top: 65px; padding-bottom: 75px; }
   .image-pair { gap: 10px; }
@@ -271,10 +271,14 @@
   .suite-preview-images { padding: 0; }
   .suite-number { font-size: 14px; }
   .suite-preview h3 { font-size: 47px; }
-  .story-preview { display: flex; flex-direction: column; gap: 35px; padding: 65px 0; }
+  .story-preview { display: flex; flex-direction: column; align-items: stretch; gap: 20px; padding: 65px 0; }
   .story-preview > div { width: 100%; }
-  .story-preview .editorial-image { aspect-ratio: 4/5; }
-  .story-preview .editorial-copy { margin: 25px 0; }
+  .story-preview-copy { display: contents; }
+  .story-preview-copy > div:first-child { order: 1; }
+  .story-preview-copy > .editorial-copy { order: 2; }
+  .story-preview .editorial-image { aspect-ratio: 4/5; order: 3; }
+  .story-preview .text-link { order: 4; }
+  .story-preview .editorial-copy { margin: 0; }
   .special-requests .section-heading { font-size: 55px; }
   .special-requests .editorial-copy { margin: 27px auto; }
   .cta-section .section-heading { font-size: 60px; }

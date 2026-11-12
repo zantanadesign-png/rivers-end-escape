@@ -41,7 +41,7 @@ function HomePage() {
 
       <section className="story-preview">
         <EditorialImage src={images.retreat} alt="Rivers End, a guesthouse rooted in its tropical surroundings" />
-        <div>
+        <div className="story-preview-copy">
           <SectionHeading eyebrow="OUR STORY">A place with<br />a story <em>to tell.</em></SectionHeading>
           <div className="editorial-copy">
             <p>{hotelConfig.hotelName} was created from a simple idea: that where you stay should feel as meaningful as what you do while you are there.</p>
