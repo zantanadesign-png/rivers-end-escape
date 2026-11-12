@@ -262,7 +262,12 @@
   .suites-heading { display: block; text-align: center; margin-bottom: 50px; }
   .suites-heading .editorial-copy { margin: 26px auto 0; }
   .suite-preview,.suite-preview:nth-child(even) { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
-  .suite-preview:nth-child(even) .suite-preview-images { order: 0; }
+  .suite-preview-copy { display: contents; }
+  .suite-preview .suite-number { order: 1; }
+  .suite-preview h3 { order: 2; }
+  .suite-preview .editorial-copy { order: 3; }
+  .suite-preview .suite-preview-images,.suite-preview:nth-child(even) .suite-preview-images { order: 4; }
+  .suite-preview .text-link { order: 5; }
   .suite-preview-images { padding: 0; }
   .suite-number { font-size: 14px; }
   .suite-preview h3 { font-size: 47px; }
